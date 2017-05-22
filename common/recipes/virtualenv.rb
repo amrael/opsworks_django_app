@@ -20,3 +20,11 @@ python_virtualenv node[:virtualenv][:path] do
   interpreter "python35"
   action :create
 end
+
+# python2 is required by dynamic-dynamodb.
+python_virtualenv "#{node[:virtualenv][:parent]}/python2" do
+  owner node[:app][:owner]
+  group node[:app][:group]
+  interpreter "python27"
+  action :create
+end
