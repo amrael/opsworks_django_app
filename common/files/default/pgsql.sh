@@ -1,1 +1,0 @@
-PATH=$PATH:/usr/pgsql-9.5/bin
