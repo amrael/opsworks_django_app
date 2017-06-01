@@ -4,7 +4,7 @@ bash "pip install dynamic-dynamodb" do
   group node[:app][:group]
   code <<-EOC
   export HOME=~#{node[:app][:owner]}
-  #{node[:virtualenv][:parent]}/python2/bin/pip install dynamic-dynamodb==1.20.5
+  #{node[:virtualenv][:parent]}/python2/bin/pip install six dynamic-dynamodb==1.20.5
   EOC
 end
 
