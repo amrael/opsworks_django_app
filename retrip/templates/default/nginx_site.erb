@@ -39,13 +39,21 @@ server {
         proxy_pass http://127.0.0.1:8000;
     }
 
-    location / {
 <% if node[:nginx][:basic_auth_entries].length > 0 %>
-        auth_basic "<%= node[:nginx][:basic_auth_realm] %>";
-        auth_basic_user_file <%= node[:nginx][:basic_auth_file] %>;
-<% end %>
+    location /external-link/ {
         proxy_pass http://127.0.0.1:8000;
     }
+
+    location / {
+        auth_basic "<%= node[:nginx][:basic_auth_realm] %>";
+        auth_basic_user_file <%= node[:nginx][:basic_auth_file] %>;
+        proxy_pass http://127.0.0.1:8000;
+    }
+<% else %>
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+    }
+<% end %>
 
     # Block all svn access
     if ($request_uri ~* ^.*\.svn.*$) {
