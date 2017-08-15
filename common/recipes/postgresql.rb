@@ -15,9 +15,9 @@ bash 'install gdal' do
   export PATH=$PATH:/usr/local/bin
   conan remote add opsworks https://api.bintray.com/conan/trippiece/opsworks
   conan install Gdal/#{gdal_version}@amrael/stable -r opsworks
+  sudo sh -c "echo 'export PATH=\$PATH:$HOME/.conan/data/Gdal/#{gdal_version}/amrael/stable/package/#{gdal_hash}/bin' > /etc/profile.d/gdal.sh"
   export PATH=$PATH:$HOME/.conan/data/Gdal/#{gdal_version}/amrael/stable/package/#{gdal_hash}/bin
-sudo sh -c "echo 'export PATH=\$PATH:$HOME/.conan/data/Gdal/#{gdal_version}/amrael/stable/package/#{gdal_hash}/bin' > /etc/profile.d/gdal.sh"
-  sudo sh -c 'echo $HOME/.conan/data/Gdal/#{gdal_version}/amrael/stable/package/#{gdal_hash}/lib > /etc/ld.so.conf.d/gdal-#{gdal_version}.conf'
+  sudo sh -c "echo $HOME/.conan/data/Gdal/#{gdal_version}/amrael/stable/package/#{gdal_hash}/lib > /etc/ld.so.conf.d/gdal-#{gdal_version}.conf"
   sudo ldconfig
   EOC
   user node[:app][:owner]
