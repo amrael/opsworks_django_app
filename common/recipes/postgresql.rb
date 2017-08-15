@@ -12,6 +12,7 @@ gdal_hash = "de9c231f84c85def9df09875e1785a1319fa8cb6"
 bash 'install gdal' do
   code <<-EOC
   sudo pip install conan
+  export PATH=$PATH:/usr/local/bin
   conan remote add opsworks https://api.bintray.com/conan/trippiece/opsworks
   conan install Gdal/#{gdal_version}@amrael/stable -r opsworks
   export PATH=$PATH:$HOME/.conan/data/Gdal/#{gdal_version}/amrael/stable/package/#{gdal_hash}/bin
@@ -21,4 +22,5 @@ sudo sh -c "echo 'export PATH=\$PATH:$HOME/.conan/data/Gdal/#{gdal_version}/amra
   EOC
   user node[:app][:owner]
   group node[:app][:group]
+  environment 'HOME' => "/home/#{node[:app][:owner]}"
 end
