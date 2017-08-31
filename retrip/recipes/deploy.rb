@@ -32,6 +32,7 @@ bash "pip install -r requirements.txt" do
   code <<-EOC
   export HOME=~#{node[:app][:owner]}
   export PATH=$PATH:/usr/pgsql-9.5/bin
+  #{node[:virtualenv][:path]}/bin/pip install pycurl --global-option="--with-nss"
   #{node[:virtualenv][:path]}/bin/pip install -r requirements.txt
   EOC
 end
