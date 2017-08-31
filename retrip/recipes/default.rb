@@ -1,7 +1,7 @@
 include_recipe 'common::virtualenv'
 
 # install required packages.
-%w{npm libjpeg-devel pandoc}.each do |pkg|
+%w{npm libjpeg-devel pandoc libcurl-devel}.each do |pkg|
   package pkg do
     action :upgrade
   end
