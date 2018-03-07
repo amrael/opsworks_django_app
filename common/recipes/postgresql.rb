@@ -1,4 +1,4 @@
-# install packages(gdal is only for installing its dependencies) 
+# install packages(gdal is only for installing its dependencies)
 %w{gdal proj-devel json-c postgresql95-devel}.each do |pkg|
   package pkg do
     action :upgrade
@@ -12,7 +12,7 @@ gdal_hash = "de9c231f84c85def9df09875e1785a1319fa8cb6"
 bash 'uninstall gdal and re-install its newer version with conan' do
   code <<-EOC
   sudo rpm -e --nodeps gdal
-  sudo pip install conan
+  sudo pip install conan==0.29
   export PATH=$PATH:/usr/local/bin
   conan remote add opsworks https://api.bintray.com/conan/trippiece/opsworks
   conan install Gdal/#{gdal_version}@amrael/stable -r opsworks
