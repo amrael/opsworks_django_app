@@ -8,11 +8,12 @@ include_recipe 'common::virtualenv'
 end
 
 # install newer nodejs
+# loosen ssl validation before the installation.
 bash 'install n and nodejs manually' do
   code <<-EOC
+  npm config set strict-ssl false
   npm install -g n
   n 9.11.2
-  exec $SHELL -l
   EOC
 end
 # remove packages no longer needed.
@@ -23,10 +24,8 @@ end
 end
 
 # install grunt-cli
-# loosen ssl validation before the installation.
 bash 'npm install -g grunt-cli' do
   code <<-EOC
-  npm config set strict-ssl false
   npm install -g grunt-cli
   EOC
 end
