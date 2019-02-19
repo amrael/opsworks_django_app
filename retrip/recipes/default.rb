@@ -7,6 +7,21 @@ include_recipe 'common::virtualenv'
   end
 end
 
+# install newer nodejs
+bash 'install n and nodejs manually' do
+  code <<-EOC
+  npm install -g n
+  n 9.11.2
+  exec $SHELL -l
+  EOC
+end
+# remove packages no longer needed.
+%w{npm nodejs}.each do |pkg|
+  package pkg do
+    action :remove
+  end
+end
+
 # install grunt-cli
 # loosen ssl validation before the installation.
 bash 'npm install -g grunt-cli' do
