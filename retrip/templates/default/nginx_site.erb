@@ -44,6 +44,10 @@ server {
         proxy_pass http://127.0.0.1:8000;
     }
 
+    location /cookie-sync/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
     location / {
         auth_basic "<%= node[:nginx][:basic_auth_realm] %>";
         auth_basic_user_file <%= node[:nginx][:basic_auth_file] %>;
