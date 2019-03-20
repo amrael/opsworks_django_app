@@ -59,7 +59,8 @@ bash "manage.py" do
   user node[:app][:owner]
   group node[:app][:group]
   code "#{node[:virtualenv][:path]}/bin/python manage.py collectstatic --noinput --settings=#{node[:app][:django_settings]} && " +
-       "#{node[:virtualenv][:path]}/bin/python manage.py migrate --settings=#{node[:app][:django_settings]}"
+       "#{node[:virtualenv][:path]}/bin/python manage.py migratesyncdb --settings=#{node[:app][:django_settings]} && " +
+       "#{node[:virtualenv][:path]}/bin/python manage.py migrate --settings=#{node[:app][:django_settings]} --database=feed_db"
 end
 
 # start or reload gunicorn depending on the current status.
